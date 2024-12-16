@@ -1,0 +1,61 @@
+/* Estilos para la tabla */
+.styled-table {
+  width: fit-content;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead {
+  width: fit-content;
+  min-width: 150px;
+  background-color: #dc3545;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  width: fit-content;
+  min-width: 150px;
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #dc3545;
+}
+
+/* Estilos para la columna de acciones */
+.actions-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para los botones */
+.styled-btn {
+  margin: 0 10px 0 0;
+  padding: 8px 16px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.styled-btn:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,45 @@
+<div style="padding: 50px" class="d-flex justify-content-center w-100 row">
+  <h1 class="text-center">Listado de Productos</h1>
+  <table class="table table-hover styled-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productList.productDTO; let i = index">
+        <th scope="row">{{ product.id }}</th>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td>{{ product.category }}</td>
+        <td class="actions-container">
+          <button class="btn styled-btn" (click)="viewDetails(product.id)">
+            Detalles
+          </button>
+          <button class="btn styled-btn" (click)="buyProduct(product.id)">
+            Comprar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Detalles del Producto</h3>
+      <p><strong>ID:</strong> {{ selectedProduct?.id }}</p>
+      <p><strong>Nombre:</strong> {{ selectedProduct?.name }}</p>
+      <p><strong>Precio:</strong> {{ selectedProduct?.price }}</p>
+      <p><strong>Stock:</strong> {{ selectedProduct?.stock }}</p>
+      <p><strong>Categoría:</strong> {{ selectedProduct?.category }}</p>
+      <button class="btn close-btn" (click)="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
