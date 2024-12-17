@@ -45,16 +45,41 @@ export class ProductsComponent implements OnInit {
     ],
   };
 
-  selectedProduct: any = null; // Guardará los detalles del producto seleccionado
-  showModal: boolean = false; // Controla la visibilidad del modal
+  selectedProduct: any = null;
+  showModal: boolean = false;
+  isLoggedIn: boolean = false;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.getProducts();
+    this.login();
+  }
+
+  login() {
+    const loginPayload = {
+      email: 'jorge@gmail.com',
+      password1: '000',
+      password2: '',
+    };
+
+    this.productService.login(loginPayload).subscribe({
+      next: (response: any) => {
+        console.log('Login exitoso:', response);
+        this.isLoggedIn = true;
+        this.getProducts();
+      },
+      error: (err) => {
+        console.error('Error al hacer login:', err);
+      },
+    });
   }
 
   viewDetails(id: number) {
+    if (!this.isLoggedIn) {
+      console.error('Usuario no logueado.');
+      return;
+    }
+
     this.productService.getProductDetails(id).subscribe({
       next: (productDetails) => {
         this.selectedProduct = productDetails;
@@ -71,9 +96,15 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
+    if (!this.isLoggedIn) {
+      console.error('Usuario no logueado.');
+      return;
+    }
+
     this.productService.getProducts().subscribe({
       next: (result) => {
-        this.productList = result.productDTO;
+        console.log(result.productDTO);
+        this.productList = result;
       },
       error: (err) => {
         console.log(err);

@@ -1,21 +1,24 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  API_URL_LIST: string = 'http://localhost:8080/maintenance-Api/allProducts';
-  API_URL_DETAIL: string = 'http://localhost:8080/maintenance-Api/details';
+  private baseUrl = 'http://localhost:8080/maintenance-Api';
 
-  constructor(private HttpClient: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<any> {
-    return this.HttpClient.get(this.API_URL_LIST).pipe((res) => res);
+  login(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, payload);
   }
 
-  getProductDetails(id: number) {
-    return this.HttpClient.get(`${this.API_URL_DETAIL}?id=${id}`);
+  getProducts(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allProducts`);
+  }
+
+  getProductDetails(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/details?id=${id}`);
   }
 }
